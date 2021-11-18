@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 if __name__ == '__main__':
 
     client = mqtt.Client()
-    client.connect("eclipse.usc.edu",port=11000,keepalive=60)
+    client.connect("eclipse.usc.edu",port=1883,keepalive=60)
     client.publish("topic/test", "Hello world!")
     client.disconnect()
 
