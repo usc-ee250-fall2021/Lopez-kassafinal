@@ -12,7 +12,7 @@ def on_message(client, userdata, msg):
     client.disconnect()
     
 client = mqtt.Client()
-client.connect("THE_IP_ADDRESS_OF_OUR_BROKER",1883,60)
+client.connect("eclipse.usc.edu",11000,60)
 
 client.on_connect = on_connect
 client.on_message = on_message
