@@ -1,0 +1,95 @@
+"""EE 250L Lab 04 Starter Code
+
+Run vm_publisher.py in a separate terminal on your VM."""
+
+import paho.mqtt.client as mqtt
+import time
+from pynput import keyboard
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected to server (i.e., broker) with result code "+str(rc))
+
+    #subscribe to topics of interest here
+
+#Default message callback. Please use custom callbacks.
+def on_message(client, userdata, msg):
+    print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+
+def on_press(key):
+    try: 
+        k = key.char # single-char keys
+    except: 
+        k = key.name # other keys
+    
+    if k == 'w':
+        print("w")
+        #send "w" character to rpi
+        client.publish("natan/lcd", "w")
+    elif k == 'a':
+        print("a")
+        # send "a" character to rpi
+        client.publish("natan/lcd", "a")
+        # print LED_OFF
+        print("LED_ON")
+        # send "LED_ON" 
+        client.publish("natan/led", "LED_ON")
+    elif k == 's':
+        print("s")
+        # send "s" character to rpi
+        client.publish("natan/lcd", "s")
+    elif k == 'd':
+        print("d")
+        # send "d" character to rpi
+        client.publish("natan/lcd", "d")
+        # print LED_OFF
+        print("LED_OFF")
+        # send "LED_OFF"
+        client.publish("natan/led", "LED_OFF")
+if __name__ == '__main__':
+    #setup the keyboard event listener
+    lis = keyboard.Listener(on_press=on_press)
+    lis.start() # start to listen on a separate thread
+
+    #this section is covered in publisher_and_subscriber_example.py
+    client = mqtt.Client()
+    client.on_message = on_message
+    client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
+
+
+    while True:
+        time.sleep(1)
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import paho.mqtt.client as mqtt
+
+# This is the Subscriber
+
+def on_connect(client, userdata, flags, rc):
+  print("Connected with result code "+str(rc))
+  client.subscribe("topic/test")
+
+def on_message(client, userdata, msg):
+  if msg.payload.decode() == "Hello world!":
+    print("Yes!")
+    client.disconnect()
+    
+client = mqtt.Client()
+client.connect("THE_IP_ADDRESS_OF_OUR_BROKER",1883,60)
+
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.loop_forever()
