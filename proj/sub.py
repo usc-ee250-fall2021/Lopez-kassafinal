@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import time
 from grovepi import *
 import sys
-ledg = 2 
+ledg = 7 
 ledb = 3
 ledr = 4
 # This is the Subscriber
@@ -19,24 +19,18 @@ def on_message(client, userdata, msg):
   print("on_message: " + msg.topic + " ")
 
 def on_colormessage(client, userdata, msg):
-  print('hi', msg.payload.decode())
   if msg.payload.decode() == "green LED on":
-    print("green")
+    print("g")
     digitalWrite(ledg , 1)
   elif msg.payload.decode() == "green LED off":
-    print("green off")
     digitalWrite(ledg , 0)
   elif msg.payload.decode() == "red LED on":
-    print("red")
     digitalWrite(ledr , 1)
   elif msg.payload.decode() == "red LED off":
-    print("red off")
     digitalWrite(ledr , 0)
   elif msg.payload.decode() == "blue LED on":
-    print("blue")
     digitalWrite(ledb , 1)
   elif msg.payload.decode() == "blue LED off":
-    print("blue off")
     digitalWrite(ledb , 0)
 
 if __name__ == '__main__':  
