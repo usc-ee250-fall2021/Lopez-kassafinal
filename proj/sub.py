@@ -11,16 +11,12 @@ pinMode(ledb,"OUTPUT")
 pinMode(ledr,"OUTPUT")
 
 def on_connect(client, userdata, flags, rc):
-  print("hellO")
   print("Connected with result code "+str(rc))
-  print("1")
   client.subscribe("NaG/led")
   client.message_callback_add("NaG/led", on_colormessage)
-  print("2")
 
 def on_message(client, userdata, msg):
-  print("message", msg)
-  print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+  print("on_message: " + msg.topic + " ")
 
 def on_colormessage(client, userdata, msg):
   print('hi', msg.payload.decode())
