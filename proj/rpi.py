@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
     client = mqtt.Client()
     client.connect("eclipse.usc.edu",port=1883,keepalive=60)
-    client.publish("topic/test", "Hello world!")
+    client.publish("nathan/green", "green LED on!")
     client.disconnect()
 
 
