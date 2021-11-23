@@ -20,7 +20,6 @@ def on_message(client, userdata, msg):
 
 def on_colormessage(client, userdata, msg):
   if msg.payload.decode() == "green LED on":
-    print("g")
     digitalWrite(ledg , 1)
   elif msg.payload.decode() == "green LED off":
     digitalWrite(ledg , 0)
@@ -32,6 +31,72 @@ def on_colormessage(client, userdata, msg):
     digitalWrite(ledb , 1)
   elif msg.payload.decode() == "blue LED off":
     digitalWrite(ledb , 0)
+  elif msg.payload.decode() == "party mode":
+    for i in range (0,10):
+      digitalWrite(ledg , 1)
+      time.sleep(.5)
+      digitalWrite(ledr , 1)
+      time.sleep(.5)
+      digitalWrite(ledg , 0)
+      time.sleep(.5)
+      digitalWrite(ledb , 1)
+      time.sleep(.5)
+      digitalWrite(ledb , 0)
+      time.sleep(.5)
+      digitalWrite(ledr , 0)
+  elif msg.payload.decode() == "all on":
+    digitalWrite(ledg , 1)
+    digitalWrite(ledr , 1)
+    digitalWrite(ledb , 1)
+  elif msg.payload.decode() == "all off":
+    digitalWrite(ledg , 0)
+    digitalWrite(ledr , 0)
+    digitalWrite(ledb , 0)
+  elif msg.payload.decode() == "usc":
+      # u
+      digitalWrite(ledg , 1)
+      time.sleep(.5)
+      digitalWrite(ledg , 0)
+      time.sleep(.5)
+      digitalWrite(ledg , 1)
+      time.sleep(.5)
+      digitalWrite(ledg , 0)
+      time.sleep(.5)
+      digitalWrite(ledg , 1)
+      time.sleep(1.5)
+      digitalWrite(ledg , 0)
+      time.sleep(.5)
+      # s
+      digitalWrite(ledr , 1)
+      time.sleep(.5)
+      digitalWrite(ledr , 0)
+      time.sleep(.5)
+      digitalWrite(ledr , 1)
+      time.sleep(.5)
+      digitalWrite(ledr , 0)
+      time.sleep(.5)
+      digitalWrite(ledr , 1)
+      time.sleep(.5)
+      digitalWrite(ledr , 0)
+      time.sleep(.5)
+      # c
+      digitalWrite(ledb , 1)
+      time.sleep(1.5)
+      digitalWrite(ledb , 0)
+      time.sleep(.5)
+      digitalWrite(ledb , 1)
+      time.sleep(.5)
+      digitalWrite(ledb , 0)
+      time.sleep(.5)
+      digitalWrite(ledb , 1)
+      time.sleep(1.5)
+      digitalWrite(ledb , 0)
+      time.sleep(.5)
+      digitalWrite(ledb , 1)
+      time.sleep(.5)
+      digitalWrite(ledb, 0)
+      time.sleep(.5)
+
 
 if __name__ == '__main__':  
   client = mqtt.Client()
