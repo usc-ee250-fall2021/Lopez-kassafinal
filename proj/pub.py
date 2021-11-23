@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import paho.mqtt.client as mqtt
 
+# code needed for voice to text converter 
 r = sr.Recognizer()
 m = sr.Microphone()
 def get_speech():
@@ -26,7 +27,7 @@ def get_speech():
         pass
 
 if __name__ == '__main__':
-
+    # publish 
     client = mqtt.Client()
     client.connect("eclipse.usc.edu",port=1883,keepalive=60)
     get_speech()
