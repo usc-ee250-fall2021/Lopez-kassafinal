@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import time
 from grovepi import *
+from grove_rgb_lcd import *
 import sys
 ledg = 7 
 ledb = 3
@@ -10,14 +11,24 @@ pinMode(ledg,"OUTPUT")
 pinMode(ledb,"OUTPUT")
 pinMode(ledr,"OUTPUT")
 
+sys.path.append('../Software/Python/')
+sys.path.append('../Software/Python/grove_rgb_lcd')
+
+
 # subscribe 
 def on_connect(client, userdata, flags, rc):
   print("Connected with result code "+str(rc))
   client.subscribe("NaG/led")
+  client.subscribe("NaG/lcd")
   client.message_callback_add("NaG/led", on_colormessage)
+  client.message_callback_add("NaG/lcd", on_lcd)
 
 def on_message(client, userdata, msg):
   print("on_message: " + msg.topic + " ")
+
+def on_lcd(client, userdata, msg):
+  if msg.payload.decode() == "UCLA":
+    setText_norefresh("UCLA < USC")	
 
 def on_colormessage(client, userdata, msg):
   # turn green led on
@@ -63,51 +74,128 @@ def on_colormessage(client, userdata, msg):
     digitalWrite(ledr , 0)
     digitalWrite(ledb , 0)
   # usc mode 
-  elif msg.payload.decode() == "usc":
-      # u
-      digitalWrite(ledg , 1)
-      time.sleep(.5)
-      digitalWrite(ledg , 0)
-      time.sleep(.5)
-      digitalWrite(ledg , 1)
-      time.sleep(.5)
-      digitalWrite(ledg , 0)
-      time.sleep(.5)
-      digitalWrite(ledg , 1)
-      time.sleep(1.5)
-      digitalWrite(ledg , 0)
-      time.sleep(.5)
-      # s
-      digitalWrite(ledr , 1)
-      time.sleep(.5)
-      digitalWrite(ledr , 0)
-      time.sleep(.5)
-      digitalWrite(ledr , 1)
-      time.sleep(.5)
-      digitalWrite(ledr , 0)
-      time.sleep(.5)
-      digitalWrite(ledr , 1)
-      time.sleep(.5)
-      digitalWrite(ledr , 0)
-      time.sleep(.5)
-      # c
-      digitalWrite(ledb , 1)
-      time.sleep(1.5)
-      digitalWrite(ledb , 0)
-      time.sleep(.5)
-      digitalWrite(ledb , 1)
-      time.sleep(.5)
-      digitalWrite(ledb , 0)
-      time.sleep(.5)
-      digitalWrite(ledb , 1)
-      time.sleep(1.5)
-      digitalWrite(ledb , 0)
-      time.sleep(.5)
-      digitalWrite(ledb , 1)
-      time.sleep(.5)
-      digitalWrite(ledb, 0)
-      time.sleep(.5)
+  elif msg.payload.decode() == "USC":
+    # u
+    digitalWrite(ledg , 1)
+    time.sleep(.5)
+    digitalWrite(ledg , 0)
+    time.sleep(.5)
+    digitalWrite(ledg , 1)
+    time.sleep(.5)
+    digitalWrite(ledg , 0)
+    time.sleep(.5)
+    digitalWrite(ledg , 1)
+    time.sleep(1.5)
+    digitalWrite(ledg , 0)
+    time.sleep(.5)
+    # s
+    digitalWrite(ledr , 1)
+    time.sleep(.5)
+    digitalWrite(ledr , 0)
+    time.sleep(.5)
+    digitalWrite(ledr , 1)
+    time.sleep(.5)
+    digitalWrite(ledr , 0)
+    time.sleep(.5)
+    digitalWrite(ledr , 1)
+    time.sleep(.5)
+    digitalWrite(ledr , 0)
+    time.sleep(.5)
+    # c
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb, 0)
+    time.sleep(.5)
+  elif msg.payload.decode() == "electrical engineering 250":
+    # e
+    digitalWrite(ledg , 1)
+    time.sleep(.5)
+    digitalWrite(ledg , 0)
+    time.sleep(.5)
 
+   # e
+    digitalWrite(ledr , 1)
+    time.sleep(.5)
+    digitalWrite(ledr , 0)
+    time.sleep(.5)
+
+    # 2
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+
+    # 5
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+
+    # 0
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
+    digitalWrite(ledb , 1)
+    time.sleep(1.5)
+    digitalWrite(ledb , 0)
+    time.sleep(.5)
 
 if __name__ == '__main__':  
   # subscribe
@@ -120,3 +208,6 @@ if __name__ == '__main__':
   client.loop_start()
   while True:
     time.sleep(1)
+
+
+

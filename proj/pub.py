@@ -19,6 +19,7 @@ def get_speech():
                 # we need some special handling here to correctly print unicode characters to standard output
                 print("{}".format(value))
                 client.publish("NaG/led", value)
+                client.publish("NaG/lcd", value)
             except sr.UnknownValueError:
                 print("Oops! Didn't catch that")
             except sr.RequestError as e:
