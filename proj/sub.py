@@ -16,6 +16,7 @@ sys.path.append('../Software/Python/grove_rgb_lcd')
 
 
 # subscribe 
+# Node-to-node communication
 def on_connect(client, userdata, flags, rc):
   print("Connected with result code "+str(rc))
   client.subscribe("NaG/led")
@@ -25,6 +26,9 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
   print("on_message: " + msg.topic + " ")
+
+# Visualization and/or control (simple web front end) element 
+
 
 def on_lcd(client, userdata, msg):
   if msg.payload.decode() == "UCLA":
