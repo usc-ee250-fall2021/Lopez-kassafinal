@@ -1,6 +1,6 @@
 ########################################################################
 ### LINK TO VIDEO
-### DRIVE: 
+### DRIVE: https://drive.google.com/file/d/1lIFcLmP_AShZIXhaftrrSjdsEJNtBYGf/view?usp=sharing
 ########################################################################
 # link to repo:
 # git@github.com:usc-ee250-fall2021/Lopez-kassafinal.git
